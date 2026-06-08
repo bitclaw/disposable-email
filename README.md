@@ -4,10 +4,10 @@ Email validation against disposable/temporary email providers with optional DNS 
 
 ## Features
 
-- **Disposable domain blocklist** — ~680 known disposable email providers (hardcoded, zero network calls)
-- **MX record validation** — Optional DNS lookup to verify the domain can receive mail
-- **Fail-open DNS** — Transient DNS errors allow the request through (only blocks definitive failures)
-- **Zero dependencies** — Uses Node.js built-in `dns/promises`
+- **Disposable domain blocklist** - ~680 known disposable email providers (hardcoded, zero network calls)
+- **MX record validation** - Optional DNS lookup to verify the domain can receive mail
+- **Fail-open DNS** - Transient DNS errors allow the request through (only blocks definitive failures)
+- **Zero dependencies** - Uses Node.js built-in `dns/promises`
 
 ## Installation
 

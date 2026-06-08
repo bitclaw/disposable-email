@@ -68,7 +68,7 @@ export async function validateEmailDomain(
             'This email domain does not exist. Please check your email address.'
         };
       }
-      // DNS timeout or other transient error — don't block the user
+      // DNS timeout or other transient error - don't block the user
       const message = error instanceof Error ? error.message : String(error);
       if (message === 'DNS timeout') {
         return {
@@ -78,7 +78,7 @@ export async function validateEmailDomain(
             'Unable to verify email domain. Please try again in a moment.'
         };
       }
-      // Other DNS errors — allow through (fail open)
+      // Other DNS errors - allow through (fail open)
       return { valid: true };
     }
   }
