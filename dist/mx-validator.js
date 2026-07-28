@@ -1,5 +1,6 @@
 import { resolve } from 'node:dns/promises';
 import { DISPOSABLE_DOMAINS } from './domains';
+import { DISPOSABLE_MX_HOSTS } from './mx-hosts';
 /**
  * Validate an email domain against the disposable blocklist and optionally
  * check DNS MX records to verify the domain can receive mail.
@@ -38,6 +39,17 @@ export async function validateEmailDomain(email, opts = {}) {
                     valid: false,
                     reason: 'no-mx-records',
                     message: 'This email domain does not appear to accept mail. Please use a different email.'
+                };
+            }
+            // Rotating-alias services (10minutemail, etc.) hand out a fresh domain per
+            // inbox, so no domain blocklist can enumerate them all, but they all route
+            // through the same handful of backend mail servers.
+            const exchangeHost = records.find(r => DISPOSABLE_MX_HOSTS.has(r.exchange.toLowerCase()));
+            if (exchangeHost) {
+                return {
+                    valid: false,
+                    reason: 'disposable',
+                    message: 'Disposable email addresses are not allowed. Please use a permanent email.'
                 };
             }
         }

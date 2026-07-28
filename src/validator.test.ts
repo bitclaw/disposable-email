@@ -6,8 +6,14 @@ describe('isDisposableEmail', () => {
     expect(isDisposableEmail('test@mailinator.com')).toBe(true);
     expect(isDisposableEmail('test@guerrillamail.com')).toBe(true);
     expect(isDisposableEmail('test@yopmail.com')).toBe(true);
-    expect(isDisposableEmail('test@tempmail.com')).toBe(true);
+    expect(isDisposableEmail('test@trashmail.com')).toBe(true);
     expect(isDisposableEmail('test@sharklasers.com')).toBe(true);
+  });
+
+  it('detects rotating alias domains present in the community blocklist', () => {
+    // regression test: vtmpj.net is a 10minutemail.com rotating alias that
+    // slipped through the old hand-maintained 682-domain list
+    expect(isDisposableEmail('test@vtmpj.net')).toBe(true);
   });
 
   it('allows legitimate email providers', () => {

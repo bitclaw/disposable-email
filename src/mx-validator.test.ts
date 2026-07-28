@@ -87,4 +87,18 @@ describe('validateEmailDomain', () => {
     });
     expect(result.valid).toBe(true);
   });
+
+  it('rejects a rotating alias domain not on the static blocklist via MX host match', async () => {
+    // e.g. 10minutemail.com hands out a fresh domain per inbox (vtmpj.net, etc.)
+    // that all route through the same backend MX host
+    mockResolve.mockImplementationOnce(() =>
+      Promise.resolve([{ exchange: 'prd-smtp.10minutemail.com', priority: 50 }])
+    );
+
+    const result = await validateEmailDomain('user@vtmpj-not-on-list.net', {
+      checkMx: true
+    });
+    expect(result.valid).toBe(false);
+    expect(result.reason).toBe('disposable');
+  });
 });
