@@ -1,6 +1,6 @@
 {
   "name": "@bitclaw/disposable-email",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Fast disposable and free email provider detection with optional MX record validation",
   "files": [
     "dist",
