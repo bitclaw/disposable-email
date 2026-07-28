@@ -1,0 +1,35 @@
+name: Sync disposable domains
+
+on:
+  schedule:
+    - cron: '0 6 * * 1' # weekly, Monday 06:00 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - run: bun install --frozen-lockfile
+      - run: bun run sync-domains
+      - run: bun run lint:fix
+      - run: bun run test
+      - uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: 'chore: sync disposable domains list'
+          title: 'chore: sync disposable domains list'
+          body: |
+            Automated weekly sync from [disposable-email-domains](https://github.com/disposable-email-domains/disposable-email-domains).
+
+            Review the diff before merging: additions are expected and safe, but a
+            large unexpected shrink in domain count could mean the upstream source
+            changed format or is temporarily broken.
+          branch: chore/sync-disposable-domains
+          delete-branch: true

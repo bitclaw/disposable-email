@@ -113,8 +113,10 @@ DISPOSABLE_DOMAINS.size                   // ~8,200
 ```
 
 Regenerated from the [disposable-email-domains](https://github.com/disposable-email-domains/disposable-email-domains)
-community CC0 blocklist via `bun scripts/sync-domains.ts`. Run it periodically (or wire into CI)
-to pick up newly discovered domains; it overwrites `src/domains.ts`.
+community CC0 blocklist via `bun run sync-domains`. It overwrites `src/domains.ts`.
+
+A weekly GitHub Actions workflow (`.github/workflows/sync-domains.yml`) runs this automatically
+and opens a PR if the list changed, so it doesn't drift the way the old hand-maintained list did.
 
 ### `DISPOSABLE_MX_HOSTS: ReadonlySet<string>`
 
