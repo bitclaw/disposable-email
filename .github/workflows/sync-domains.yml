@@ -21,7 +21,19 @@ jobs:
       - run: bun run sync-domains
       - run: bun run lint:fix
       - run: bun run test
+      - name: Check for domain list changes
+        id: diff
+        run: |
+          if git diff --quiet -- src; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Bump patch version
+        if: steps.diff.outputs.changed == 'true'
+        run: npm version patch --no-git-tag-version
       - uses: peter-evans/create-pull-request@v7
+        if: steps.diff.outputs.changed == 'true'
         with:
           commit-message: 'chore: sync disposable domains list'
           title: 'chore: sync disposable domains list'
@@ -31,5 +43,7 @@ jobs:
             Review the diff before merging: additions are expected and safe, but a
             large unexpected shrink in domain count could mean the upstream source
             changed format or is temporarily broken.
+
+            Version bumped, merging publishes automatically.
           branch: chore/sync-disposable-domains
           delete-branch: true
