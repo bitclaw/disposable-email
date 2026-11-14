@@ -2,6 +2,9 @@
 
 Email validation against disposable/temporary email providers with optional DNS MX record checking.
 
+> Part of [Warpkit](https://warpkit.dev/?utm_source=github&utm_medium=readme), my TypeScript SaaS starter.
+> I'm open for consulting on this kind of work: [bitclaw.com/hire](https://bitclaw.com/hire?utm_source=github&utm_medium=readme).
+
 ## Features
 
 - **Disposable domain blocklist** - ~8,200 known disposable email providers, generated from a
