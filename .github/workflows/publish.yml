@@ -52,6 +52,12 @@ jobs:
         run: npm publish --provenance --access public
       - name: Tag release
         if: steps.check.outputs.publish == 'true'
+        # `npm version` may have pushed the tag already; that is not a failure.
         run: |
-          git tag "v${{ steps.check.outputs.local }}"
-          git push origin "v${{ steps.check.outputs.local }}"
+          TAG="v${{ steps.check.outputs.local }}"
+          if git ls-remote --exit-code --tags origin "refs/tags/$TAG" > /dev/null; then
+            echo "$TAG already exists"
+          else
+            git tag "$TAG"
+            git push origin "$TAG"
+          fi
