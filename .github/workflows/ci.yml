@@ -23,3 +23,7 @@ jobs:
       - run: bun run knip
       - run: bun run typecheck
       - run: bun run test
+      - run: bun run build
+      # Bun resolves extensionless imports; Node's ESM loader does not. Load the
+      # built package the way Node consumers (Vitest, Vercel, servers) will.
+      - run: node -e "import('./dist/index.js').then(m => { if (!Object.keys(m).length) process.exit(1) })"

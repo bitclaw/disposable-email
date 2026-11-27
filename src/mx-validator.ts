@@ -1,7 +1,7 @@
 import { resolve } from 'node:dns/promises';
-import { DISPOSABLE_DOMAINS } from './domains';
-import { DISPOSABLE_MX_HOSTS } from './mx-hosts';
-import type { EmailValidationResult, MxValidationOptions } from './types';
+import { DISPOSABLE_DOMAINS } from './domains.js';
+import { DISPOSABLE_MX_HOSTS } from './mx-hosts.js';
+import type { EmailValidationResult, MxValidationOptions } from './types.js';
 
 /**
  * Validate an email domain against the disposable blocklist and optionally

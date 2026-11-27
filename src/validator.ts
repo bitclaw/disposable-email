@@ -1,4 +1,4 @@
-import { DISPOSABLE_DOMAINS } from './domains';
+import { DISPOSABLE_DOMAINS } from './domains.js';
 
 /**
  * Check if an email address uses a known disposable/temporary email domain.

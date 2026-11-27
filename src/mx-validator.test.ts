@@ -8,7 +8,7 @@ mock.module('node:dns/promises', () => ({
   resolve: mockResolve
 }));
 
-const { validateEmailDomain } = await import('./mx-validator');
+const { validateEmailDomain } = await import('./mx-validator.js');
 
 describe('validateEmailDomain', () => {
   it('rejects disposable email domains', async () => {

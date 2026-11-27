@@ -1,5 +1,5 @@
-export { DISPOSABLE_DOMAINS } from './domains';
-export { DISPOSABLE_MX_HOSTS } from './mx-hosts';
-export { validateEmailDomain } from './mx-validator';
-export type { EmailValidationResult, MxValidationOptions } from './types';
-export { isDisposableEmail } from './validator';
+export { DISPOSABLE_DOMAINS } from './domains.js';
+export { DISPOSABLE_MX_HOSTS } from './mx-hosts.js';
+export { validateEmailDomain } from './mx-validator.js';
+export type { EmailValidationResult, MxValidationOptions } from './types.js';
+export { isDisposableEmail } from './validator.js';

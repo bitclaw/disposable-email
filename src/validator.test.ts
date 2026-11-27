@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'bun:test';
-import { isDisposableEmail } from './validator';
+import { isDisposableEmail } from './validator.js';
 
 describe('isDisposableEmail', () => {
   it('detects known disposable domains', () => {
